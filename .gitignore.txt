@@ -1,0 +1,22 @@
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Gradle (optional)
+.gradle/
+build/
+
+# Maven (optional)
+target/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Binary Files
+*.class
+*.jar
+
+# Log files
+*.log
