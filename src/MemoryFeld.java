@@ -1,22 +1,3 @@
-//**********************Einsendeaufgabe 13************
-//**********************Aufgabe 1 ********************
-// In den Zeilen 94, 212, 252-255, 432
-// und in der neuen Methode zeigeEndausgabe Zeile 261-309
-// steht der neue Code für die Aufgabe 1 
-//****************************************************
-
-
-
-//**********************Aufgabe 2 ********************
-// Änderungen in den Zeilen 70, 143-144, 158, und in der Methode
-// spielerWechsel Zeile 364, 375-377
-//****************************************************
-
-
-//**********************Aufgabe 3 ********************
-// In den Zeilen 100, 165-182, 368-386. Die neue Methode schummelAnzeigen Zeile 391-418 
-//****************************************************
-
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -66,9 +47,7 @@ public class MemoryFeld {
 private int menschPunkte, computerPunkte;
 
 //zwei Labels für die Punkte und eins für den aktuellen Spieler
-//**********************Aufgabe 2 **************************
 private Label menschPunkteLabel, computerPunkteLabel, amZugLabel;
-//**********************************************************
 
 //für die Computerstärke
 private int computerstärke;
@@ -89,16 +68,11 @@ private int[][] gemerkteKarten;
 //für den Timer
 private Timeline timer;
 
-//************Aufgabe 1 ****************************
 //damit das Spiel nicht sofort beendet wird
 private boolean spielZuEnde = false;
-//**************************************************
 
-
-//************Aufgabe 3 ****************************
-//der neue Button zum Schummeln
+//der Button zum Schummeln
 private Button schummelButton;
-//**************************************************
 
 
 
@@ -130,7 +104,8 @@ public MemoryFeld() {
 			gemerkteKarten[aussen][innen] = -1;
 }
 
-//die Methode erstellt die Oberfläche und zeichnet die Karten über eine eigene Methode. Übergeben wird ein FlowPane
+//die Methode erstellt die Oberfläche und zeichnet die Karten über eine eigene Methode. 
+//Übergeben wird ein FlowPane
 public FlowPane initGUI(FlowPane feld) {
 	
 	//für die Ausgaben
@@ -138,11 +113,9 @@ public FlowPane initGUI(FlowPane feld) {
 	menschPunkteLabel = new Label(Integer.toString(menschPunkte));
 	computerPunkteLabel = new Label(Integer.toString(computerPunkte));
 	
-//*****************************Aufgabe 2 *****************************
 	//Neues Label für Anzeige des aktuellen Spielers, plus eine kleine optische Hervorhebung
 	amZugLabel = new Label("Am Zug: Mensch");
 	amZugLabel.setStyle("-fx-font-size: 14 px; -fx-font-weight: bold;");
-//********************************************************************
 	
 	//Layout für Punkte und Spieleranzeige
 	//in zwei Spalten anzeigen
@@ -152,15 +125,10 @@ public FlowPane initGUI(FlowPane feld) {
 	tempGrid.add(menschPunkteLabel, 1,0);
 	tempGrid.add(new Label ("Computer: "), 0,1);
 	tempGrid.add(computerPunkteLabel, 1,1);
-	
-//****************************Aufgabe 2 *****************************	
+		
 	//einfügen ins GridPane wichtig in die richtige Position damit es unterhalb steht
 	tempGrid.add(amZugLabel, 0,2,2,1);
-//*******************************************************************	
 	
-	
-	
-//*****************************Aufgabe 3 ****************************
 	//der Schummel Button als Klassenvariable
 	schummelButton = new Button("Alles aufdecken");
 	//Aktion beim klicken auf den Button einbinden
@@ -180,8 +148,6 @@ public FlowPane initGUI(FlowPane feld) {
 	
 	return feld;
 }
-//*******************************************************************
-
 
 //das eigentliche Spielfeld erstellen
 private void kartenZeichnen(FlowPane feld) {
@@ -207,12 +173,8 @@ private void kartenZeichnen(FlowPane feld) {
 //Sie wird beim Anklicken einer Karte ausgeführt
 public void karteÖffnen(MemoryKarte karte) {
 	
-//****************Aufgabe1***********************	
 	//keine Züge mehr nach Spielende
 	if(spielZuEnde) return;
-//***********************************************
-	
-	
 	
 	//zum Zwischenspeicher der ID und der Position
 	int kartenID, kartenPos;
@@ -246,17 +208,14 @@ public void karteÖffnen(MemoryKarte karte) {
 		timer.play();
 	}
 	
-	
-	//haben wir zusammen 21 Paare, dann ist das Spiel vorbei
-//******************Aufgabe 1*******************************	
+	//haben wir zusammen 21 Paare, dann ist das Spiel vorbei	
 	if(computerPunkte + menschPunkte == 21) {
 		spielZuEnde = true;
 		zeigeEndausgabe();
 	}	
 }
-//**********************************************************
 
-//******************Aufgabe 1 ******************************
+
 //die Methode ermittelt den Gewinner und zeigt es in einem Label an
 private void zeigeEndausgabe() {
 	
@@ -307,8 +266,6 @@ endStage.setScene(scene);
 endStage.show();
 	
 }
-//**********************************************************
-
 
 
 //die Methode prüft, ob ein Paar gefunden wurde 
@@ -358,15 +315,11 @@ private void karteSchliessen() {
 private void spielerWechseln() {
 	//wenn der Mensch an der Reihe war, kommt jetzt der Computer
 	if (spieler == 0) {
-		spieler = 1;
-
-//*************************Aufgabe 2 ***************************		
+		spieler = 1;		
 		amZugLabel.setText("Am Zug: Computer");
 		
-		///****************Aufgabe 3 ***************************
 		//Schummel Button deaktivieren. der Button muss hier als Klassenvariable deklariert werden
 		if (schummelButton != null) schummelButton.setVisible(false);
-		//******************************************************
 		
 		//runLater damit auf jeden Fall zuerst das Label gewechselt wird auf den aktuellen Spieler
 		// und dann erst der Computer zieht
@@ -376,7 +329,6 @@ private void spielerWechseln() {
 		spieler = 0;
 		amZugLabel.setText("Am Zug: Mensch");
 		
-		//*****************Aufgabe 3 ***************************
 		// nur aktivieren, wenn gerade keine Karte offen ist
 		if(schummelButton != null) {
 			//wenn wir wieder dran sind wird der Button angezeigt
@@ -386,7 +338,6 @@ private void spielerWechseln() {
 	}
 }
 
-//*******************************Aufgabe 3 **********************************
 
 private void schummelAnzeigen() {
 	// nur, wenn der Mensch am Zug ist und keine Karte offen ist 
@@ -416,9 +367,6 @@ private void schummelAnzeigen() {
 	schummelTimer.play();
 	
 }
-
-//*****************************************************************************
-
 
 
 //die Methode setzt die Computerzüge um.
